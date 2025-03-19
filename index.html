@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Click Button with Fireworks</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f8ff;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            border: 5px solid #007bff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            position: relative; /* Để đặt canvas ở vị trí tuyệt đối */
+            overflow: hidden; /* Ẩn các phần tử ra ngoài */
+        }
+
+        h1 {
+            color: #007bff;
+        }
+
+        .custom-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.3s, background-color 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .custom-button:hover {
+            background-color: #0056b3;
+            transform: translate(20px, 20px);
+        }
+
+        .custom-button i {
+            margin-right: 8px; /* Khoảng cách giữa biểu tượng và văn bản */
+        }
+
+        .message {
+            display: none; /* Ẩn thông điệp ban đầu */
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+            background-color: #e7f3fe;
+            border: 1px solid #b3d7ff;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none; /* Không cho phép tương tác với canvas */
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Welcome to the Click Challenge!</h1>
+    <button class="custom-button" onclick="handleClick()">
+        <i class="fas fa-smile"></i> Click Here
+    </button>
+    <div class="message" id="message">
+        Good morning, Mr. Forzen! 早安 ! <br><br>
+        Congratulations on successfully clicking your way to this page to see this message! 恭喜你 for making this small but meaningful effort today. Your determination to start your day with positivity is truly admirable.<br><br>
+        May your day be filled with wonderful opportunities and success! 祝你今天充满能量和好运 ! Remember that every small step forward is progress, just like clicking to find this message.<br><br>
+        Keep shining bright like the morning sun! 加油!
+    </div>
+    <canvas id="fireworksCanvas"></canvas>
+
+    <script>
+        function handleClick() {
+            document.getElementById('message').style.display = 'block'; // Hiển thị thông điệp
+            createFireworks(); // Tạo hiệu ứng pháo hoa
+        }
+
+        function createFireworks() {
+            const canvas = document.getElementById('fireworksCanvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            // Tạo hiệu ứng pháo hoa
+            for (let i = 0; i < 100; i++) {
+                const x = Math.random() * canvas.width;
+                const y = Math.random() * canvas.height;
+                const radius = Math.random() * 3 + 2;
+                const color = `hsl(${Math.random() * 360}, 100%, 50%)`;
+                drawFirework(x, y, radius, color);
+            }
+        }
+
+        function drawFirework(x, y, radius, color) {
+            const canvas = document.getElementById('fireworksCanvas');
+            const ctx = canvas.getContext('2d');
+            ctx.beginPath();
+            ctx.arc(x, y, radius, 0, Math.PI * 2);
+            ctx.fillStyle = color;
+            ctx.fill();
+        }
+    </script>
+
+</body>
+</html>
